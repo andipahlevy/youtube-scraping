@@ -22,7 +22,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- <link rel="manifest" href="site.webmanifest"> -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ url('theme/img/favicon.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url('theme/images/favicon.png') }}">
     <!-- Place favicon.ico in the root directory -->
 
     <!-- CSS here -->
@@ -69,5 +69,8 @@
 	.section-padding {
 		padding-top: 50px;
 		padding-bottom: 50px;
+	}
+	.newletter_area {
+		background-image: url({{ url('theme/images/newsletter.png') }});
 	}
 	</style>

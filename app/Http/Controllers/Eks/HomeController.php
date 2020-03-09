@@ -98,7 +98,7 @@ class HomeController extends Controller
 		}
 		$data['api'] = $RestAPI;
 		$cond = [
-			'loc'	=> url('video/'.$id.'/'.$urlTitle.'/'.$urlDesc)
+			'loc'	=> url('video/'.$urlTitle.'/'.$id.'/'.$urlDesc.'/'.$meta)
 		];
 		$cond2 = [
 			'loc'	=> url($urlTitle)
