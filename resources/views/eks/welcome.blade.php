@@ -224,7 +224,7 @@
 								</div>
                                 <div class="place_info">
 									@if(@$dt['vid'] != '')
-										@if($dt['meta'] != '')
+										@if(isset($dt['meta']) && $dt['meta'] != '')
 											<a href="{{ url('video/'.urlencode(str_replace('.','%2E',$dt['title'])).'/'.$dt['vid'].'/'.base64_encode(@$dt['oriDesc']).'/'.base64_encode($dt['meta']) ) }}"><h3>{{ @$dt['title'] }}</h3></a>
 										@else
 											@php
