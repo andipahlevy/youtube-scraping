@@ -23,7 +23,7 @@ $router->group(['namespace' => 'Eks'], function() use ($router)
 		'as' => 'find', 'uses' => 'HomeController@find'
 	]);
 	
-	$router->get('/video/{id}/{title}', [
+	$router->get('/video/{title}/{id}/{desc}/{meta}', [
 		'as' => 'detail', 'uses' => 'HomeController@detail'
 	]);
 	

@@ -2,15 +2,22 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>{{ @$q }}  {{ env('APP_NAME') }}</title>
     
-	<meta name="description" content="Video {{ @$q }}">
-	<meta name='keywords' content='{{ @$q }}'/>
+	<?php 
+	$m_title 	= $q ?? env('APP_NAME');
+	$d_desc 	= $desc ?? 'Watch video in '.env('APP_NAME');
+	$m_desc 	= strip_tags(str_replace('*dot*','.',urldecode($d_desc))) .' '. $m_title ?? $m_title ;
+	?>
 	
-	<meta property='og:url' content='http://edosen.blogspot.com/2015/09/cara-cepat-menambah-teman-di-facebook.html'/>
-	<meta property='og:title' content='Cara Cepat Menambah Teman Di Facebook Terbaru 2015 (Updated)'/>
-	<meta property='og:description' content='Hai semua, nih gan saya mau share cara cepat tambah teman di facebook. Trik ini cocok buat kalian yang suka promo di facebook. Skrip di bawah sangat cocok dipelajari teman-teman. Bagus deh kalo teman-teman kembangin sendiri.'/>
-	<meta property='og:image' content='http://2.bp.blogspot.com/-nI7WWbHhu0k/VgK_pu2z1UI/AAAAAAAAA-0/TSgnYk4z1J4/w1200-h630-p-k-no-nu/Gambar%2BCara%2BCepat%2BMenambah%2BTeman%2BDi%2BFacebook%2BTerbaru%2B2015%2B%2528Updated%2529.PNG'/>
-	<meta property='og:type' content='article'/>
-	<meta property='og:site_name' content='EDosen'/>
+	<meta name="description" content="Video {{ $m_desc }}">
+	<meta name='keywords' content='{{ implode(',',explode(' ',$m_title)) }}'/>
+	
+	
+	<meta property='og:url' content="<?php echo "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" ?>"/>
+	<meta property='og:title' content="{{ $m_title }}"/>
+	<meta property='og:description' content='{{ $m_desc }}'/>
+	<meta property='og:image' content=''/>
+	<meta property='og:type' content='video'/>
+	<meta property='og:site_name' content="{{ env('APP_NAME') }}"/>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 

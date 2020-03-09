@@ -79,36 +79,113 @@
 				  </div>
                   <div class="feature-img">
                      <div style="overflow:hidden;position: relative;" class="img-fluid">
-							<iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="800" 
-							height="443" type="text/html" 
-							src="https://www.youtube.com/embed/
-
-							{{ $id }}
-
-							?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtube-embed.com"></iframe>
-							<div style="position: absolute;bottom: 10px;left: 0;right: 0;margin-left: auto;margin-right: auto;color: #000;text-align: center;">
-								<small style="line-height: 1.8;font-size: 0px;background: #fff;"> 
-									<a href="https://nogomi.cc/">Nogomi</a> 
-								</small>
+							<style>
+    .hytPlayerWrap {
+        display: inline-block;
+        position: relative;
+    }
+    .hytPlayerWrap.ended::after {
+        content:"";
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        cursor: pointer;
+        background-color: black;
+        background-repeat: no-repeat;
+        background-position: center; 
+        background-size: 64px 64px;
+        background-image: url(data:image/svg+xml;utf8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgiIGhlaWdodD0iMTI4IiB2aWV3Qm94PSIwIDAgNTEwIDUxMCI+PHBhdGggZD0iTTI1NSAxMDJWMEwxMjcuNSAxMjcuNSAyNTUgMjU1VjE1M2M4NC4xNSAwIDE1MyA2OC44NSAxNTMgMTUzcy02OC44NSAxNTMtMTUzIDE1My0xNTMtNjguODUtMTUzLTE1M0g1MWMwIDExMi4yIDkxLjggMjA0IDIwNCAyMDRzMjA0LTkxLjggMjA0LTIwNC05MS44LTIwNC0yMDQtMjA0eiIgZmlsbD0iI0ZGRiIvPjwvc3ZnPg==);
+    }
+    .hytPlayerWrap.paused::after {
+        content:"";
+        position: absolute;
+        top: 70px;
+        left: 0;
+        bottom: 50px;
+        right: 0;
+        cursor: pointer;
+        background-color: black;
+        background-repeat: no-repeat;
+        background-position: center; 
+        background-size: 40px 40px;
+        background-image: url(data:image/svg+xml;utf8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEiIHdpZHRoPSIxNzA2LjY2NyIgaGVpZ2h0PSIxNzA2LjY2NyIgdmlld0JveD0iMCAwIDEyODAgMTI4MCI+PHBhdGggZD0iTTE1Ny42MzUgMi45ODRMMTI2MC45NzkgNjQwIDE1Ny42MzUgMTI3Ny4wMTZ6IiBmaWxsPSIjZmZmIi8+PC9zdmc+);
+    }
+</style>
+							<div class="hytPlayerWrapOuter">
+								<div class="hytPlayerWrap">
+									<iframe
+										width="840" height="560"
+										src="https://www.youtube.com/embed/{{ $id }}?rel=0&enablejsapi=1"
+										frameborder="0"
+									></iframe>
+								</div>
 							</div>
-							<style>#gmap_canvas img {
-								max-width: none!important;
-								background: none!important
-							}
-
-							</style>
-						</div>
+							<script>
+    "use strict";
+    document.addEventListener('DOMContentLoaded', function() {
+        // Activate only if not already activated
+        if (window.hideYTActivated) return;
+        // Activate on all players
+        let onYouTubeIframeAPIReadyCallbacks = [];
+        for (let playerWrap of document.querySelectorAll(".hytPlayerWrap")) {
+            let playerFrame = playerWrap.querySelector("iframe");
+            
+            let tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/iframe_api";
+            let firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+            
+            let onPlayerStateChange = function(event) {
+                if (event.data == YT.PlayerState.ENDED) {
+                    playerWrap.classList.add("ended");
+                } else if (event.data == YT.PlayerState.PAUSED) {
+                    playerWrap.classList.add("paused");
+                } else if (event.data == YT.PlayerState.PLAYING) {
+                    playerWrap.classList.remove("ended");
+                    playerWrap.classList.remove("paused");
+                }
+            };
+            
+            let player;
+            onYouTubeIframeAPIReadyCallbacks.push(function() {
+                player = new YT.Player(playerFrame, {
+                    events: {
+                        'onStateChange': onPlayerStateChange
+                    }
+                });
+            });
+          
+            playerWrap.addEventListener("click", function() {
+                let playerState = player.getPlayerState();
+                if (playerState == YT.PlayerState.ENDED) {
+                    player.seekTo(0);
+                } else if (playerState == YT.PlayerState.PAUSED) {
+                    player.playVideo();
+                }
+            });
+        }
+        
+        window.onYouTubeIframeAPIReady = function() {
+            for (let callback of onYouTubeIframeAPIReadyCallbacks) {
+                callback();
+            }
+        };
+        
+        window.hideYTActivated = true;
+    });
+</script>
+					  </div>
                   </div>
                   <div class="blog_details">
                      
                      <ul class="blog-info-link mt-3 mb-4">
-                        <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
-                        <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
+                        <li><a href="#"><i class="fa fa-clock-o"></i> {{ $met[0] }}</a></li>
+                        <li><a href="#"><i class="fa fa-eye"></i> {{ $met[1] }}</a></li>
                      </ul>
                      <p class="excert">
-                        MCSE boot camps have its supporters and its detractors. Some people do not understand why you
-                        should have to spend money on boot camp when you can get the MCSE study materials yourself at a
-                        fraction of the camp price. However, who has the willpower
+					 {!! str_replace('*dot*','.',urldecode($desc)) !!}
                      </p>
                      
                   </div>
@@ -125,10 +202,10 @@
                 <div class="col-lg-12">
 					<div class="row mb-3">
 						<div class="section_title text-center">
-							@if(isset($title2))
+							@if(isset($title))
 								<h2> Similar videos:</h2>
 							@else
-								<h1>{{ ucfirst(@$q) ?? ucfirst(env('APP_NAME')) }}</h1>
+								<h1>{{ urldecode(ucfirst(@$q)) ?? ucfirst(env('APP_NAME')) }}</h1>
 							@endif
 						</div>	
 					</div>
@@ -145,11 +222,11 @@
 								</div>
                                 <div class="place_info">
 									@if(@$dt['vid'] != '')
-                                    <a href="{{ url('video/'.$dt['vid'].'/'.str_replace([' ','/'],['-','*sls*'],$dt['title'])) }}"><h3>{{ @$dt['title'] }}</h3></a>
+                                    <a href="{{ url('video/'.urlencode(str_replace('.','%2E',$dt['title'])).'/'.$dt['vid'].'/'.base64_encode(@$dt['oriDesc']).'/'.base64_encode($dt['meta']) ) }}"><h3>{{ @$dt['title'] }}</h3></a>
                                     @else
 									<h3>{{ @$dt['title'] }}</h3>
 									@endif
-									<p>{{ @$dt['desc'] }}</p>
+									<p>Watch {{ @$dt['desc'] }}</p>
                                     <div class="rating_days d-flex justify-content-between">
 									@php
 									$m = explode('^nl',@$dt['meta'])

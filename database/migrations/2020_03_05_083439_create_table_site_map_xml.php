@@ -15,7 +15,7 @@ class CreateTableSiteMapXml extends Migration
     {
         Schema::create('SITE_MAP', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('loc',255)->nullable();
+            $table->text('loc')->nullable();
             $table->dateTime('lastmod')->nullable();
             $table->string('changefreq',100)->nullable();
             $table->string('priority',10)->nullable();

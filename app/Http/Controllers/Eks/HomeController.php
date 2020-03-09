@@ -17,15 +17,14 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        //
+        // Cache::flush();
     }
 
     public function index()
 	{
-		// Cache::flush();die;
 		$Master = new Master;
 		
-		if (Cache::has('ytrendd')){
+		if (Cache::has('ytrend')){
 			$RestAPI = Cache::get('ytrend');
 		} else {
 			$RestAPI = Cache::rememberForever('ytrend', function () use($Master) {
@@ -39,8 +38,7 @@ class HomeController extends Controller
 
     public function find($q)
 	{
-		// Cache::flush();die;
-		$q = str_replace('-',' ',urldecode($q));
+		$q = str_replace(['+','-'],[' ',' '],urldecode($q));
 		$Master = new Master;
 		
 		if (Cache::has($q)){
@@ -57,7 +55,7 @@ class HomeController extends Controller
 		}
 		$data['api'] = $RestAPI;
 		$cond = [
-			'loc'	=> url($q)
+			'loc'	=> url(urlencode($q))
 		];
 		$save = [
 			'lastmod'	=> date('Y-m-d H:i:s'),
@@ -68,34 +66,31 @@ class HomeController extends Controller
 		return view('eks.welcome', compact('data','q'));
 	}
 	
-	public function detail($id,$title)
+	public function detail($title, $id,$desc, $meta)
 	{
-		// Cache::flush();die;
+		$urlTitle = $title;
+		$urlDesc = $desc;
+		$title = urldecode($title);
+		$met = explode('^nl',base64_decode($meta));
 		
-		$title1 = str_replace(
-			['*sls*'],
-			[' '],
-			$title
+		$desc = str_replace(
+			['*sls*','*hstag*','*nl*'],
+			['/','#','</br>'],
+			base64_decode($desc)
 		);
 		
-		$title2 = str_replace(
-			['*sls*'],
-			['/'],
-			$title
-		);
+		$q = $title;
 		
-		$q = $title1;
-		
-		$q = str_replace('-',' ',urldecode($q));
+		$q = str_replace('+',' ',urldecode($q));
 		$Master = new Master;
 		
 		if (Cache::has($q)){
 			$RestAPI = Cache::get($q);
 		} else {
-			$RestAPI = Cache::rememberForever($q, function () use($Master, $q) {
+			$RestAPI = Cache::rememberForever($q, function () use($Master, $title) {
 				$output =  $Master->setEndpoint('youtube/search')
 						->setQuery([
-							'q'=>$q
+							'q'=>$title
 						])
 						->get();
 				return $output;
@@ -103,7 +98,10 @@ class HomeController extends Controller
 		}
 		$data['api'] = $RestAPI;
 		$cond = [
-			'loc'	=> url($q)
+			'loc'	=> url('video/'.$id.'/'.$urlTitle.'/'.$urlDesc)
+		];
+		$cond2 = [
+			'loc'	=> url($urlTitle)
 		];
 		$save = [
 			'lastmod'	=> date('Y-m-d H:i:s'),
@@ -111,7 +109,8 @@ class HomeController extends Controller
 			'priority'	=> '0.5',
 		];
 		dispatch((new AddSitemap($cond, $save))->onQueue('low'));
-		return view('eks.welcome', compact('data','q','id','title2'));
+		dispatch((new AddSitemap($cond2, $save))->onQueue('low'));
+		return view('eks.welcome', compact('data','q','id','title','desc', 'met'));
 	}
 	
 	public function sitemap()
@@ -134,11 +133,13 @@ class HomeController extends Controller
 		$sm = SiteMap::all();
 		foreach($sm as $row)
 		{
+		 $locc = preg_replace('/&(?!#?[a-z0-9];)/', '&amp;', $row['loc']);
 		 $content .= "<url>";
-		 $content .= "<loc>".$row['loc']."</loc>";
+		 $content .= "<loc>".str_replace(' ','+',$locc)."</loc>";
 		 $content .= "<lastmod>".$row['lastmod']."</lastmod>";
 		 $content .= "<changefreq>monthly</changefreq>";
 		 $content .= "</url>";
+		 
 		}
 
 		$content .= "</urlset>";
