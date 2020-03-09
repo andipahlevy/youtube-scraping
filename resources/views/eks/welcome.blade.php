@@ -182,7 +182,9 @@
                      
                      <ul class="blog-info-link mt-3 mb-4">
                         <li><a href="#"><i class="fa fa-clock-o"></i> {{ $met[0] }}</a></li>
-                        <li><a href="#"><i class="fa fa-eye"></i> {{ $met[1] }}</a></li>
+						@if(isset($met[1]))
+							<li><a href="#"><i class="fa fa-eye"></i> {{ $met[1] }}</a></li>
+						@endif
                      </ul>
                      <p class="excert">
 					 {!! str_replace('*dot*','.',urldecode($desc)) !!}
@@ -222,8 +224,12 @@
 								</div>
                                 <div class="place_info">
 									@if(@$dt['vid'] != '')
-                                    <a href="{{ url('video/'.urlencode(str_replace('.','%2E',$dt['title'])).'/'.$dt['vid'].'/'.base64_encode(@$dt['oriDesc']).'/'.base64_encode($dt['meta']) ) }}"><h3>{{ @$dt['title'] }}</h3></a>
-                                    @else
+										@if($dt['meta'] != '')
+											<a href="{{ url('video/'.urlencode(str_replace('.','%2E',$dt['title'])).'/'.$dt['vid'].'/'.base64_encode(@$dt['oriDesc']).'/'.base64_encode($dt['meta']) ) }}"><h3>{{ @$dt['title'] }}</h3></a>
+										@else
+											<a href="{{ url('video/'.urlencode(str_replace('.','%2E',$dt['title'])).'/'.$dt['vid'].'/'.base64_encode(@$dt['oriDesc']).'/'.base64_encode('Watch now!') ) }}"><h3>{{ @$dt['title'] }}</h3></a>
+										@endif
+									@else
 									<h3>{{ @$dt['title'] }}</h3>
 									@endif
 									<p>Watch {{ @$dt['desc'] }}</p>
