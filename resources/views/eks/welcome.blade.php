@@ -217,7 +217,14 @@
 						<div class="col-lg-3 col-md-3">
                             <div class="single_place">
                                 <div class="thumb">
+								@if(isset($dt['img']))
+									<?php 
+										if(substr($dt['img'],0,4) != 'http'){
+											$dt['img'] = 'http://'.$dt['img'];
+										}
+									?>
                                     <img src="{{ @$dt['img'] }}" alt="{{ @$dt['title'] }}" title="{{ @$dt['title'] }}">
+								@endif	
 									@if(@$dt['duration'])
                                     <a href="#" class="prise">{{ @$dt['duration'] }}</a>
 									@endif
