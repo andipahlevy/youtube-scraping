@@ -220,7 +220,7 @@
 								@if(isset($dt['img']))
 									<?php 
 										if(substr($dt['img'],0,4) != 'http'){
-											$dt['img'] = 'http://'.$dt['img'];
+											$dt['img'] = 'http:'.$dt['img'];
 										}
 									?>
                                     <img src="{{ @$dt['img'] }}" alt="{{ @$dt['title'] }}" title="{{ @$dt['title'] }}">
