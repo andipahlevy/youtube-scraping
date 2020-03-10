@@ -81,7 +81,7 @@
                      <div style="overflow:hidden;position: relative;" class="img-fluid">
 							<style>
     .hytPlayerWrap {
-        display: inline-block;
+        display: block;
         position: relative;
     }
     .hytPlayerWrap.ended::after {
@@ -116,7 +116,7 @@
 							<div class="hytPlayerWrapOuter">
 								<div class="hytPlayerWrap">
 									<iframe
-										width="840" height="560"
+										width="100%" height="560"
 										src="https://www.youtube.com/embed/{{ $id }}?rel=0&enablejsapi=1"
 										frameborder="0"
 									></iframe>
