@@ -227,7 +227,7 @@
 											$dt['img'] = 'https:'.$dt['img'];
 										}
 									?>
-                                    <img src="{{ @$dt['img'] }}" alt="{{ @$dt['title'] }}" title="{{ @$dt['title'] }}">
+                                    <img src="{{ @$dt['img'] }}" alt="{{ @$dt['title'] }} - {{ env('APP_NAME') }}" title="{{ @$dt['title'] }}">
 								@endif	
 									@if(@$dt['duration'])
                                     <a href="#" class="prise">{{ @$dt['duration'] }}</a>
