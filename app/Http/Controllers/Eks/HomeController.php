@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Cache;
 use App\Models\SiteMap;
 use App\Jobs\AddSitemap;
 use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -82,21 +83,21 @@ class HomeController extends Controller
 		$q = $title;
 		
 		$q = str_replace('+',' ',urldecode($q));
-		$Master = new Master;
 		
-		if (Cache::has($q)){
-			$RestAPI = Cache::get($q);
-		} else {
-			$RestAPI = Cache::rememberForever($q, function () use($Master, $title) {
-				$output =  $Master->setEndpoint('youtube/search')
-						->setQuery([
-							'q'=>$title
-						])
-						->get();
-				return $output;
-			});
-		}
-		$data['api'] = $RestAPI;
+		// $Master = new Master;
+		// if (Cache::has($q)){
+			// $RestAPI = Cache::get($q);
+		// } else {
+			// $RestAPI = Cache::rememberForever($q, function () use($Master, $title) {
+				// $output =  $Master->setEndpoint('youtube/search')
+						// ->setQuery([
+							// 'q'=>$title
+						// ])
+						// ->get();
+				// return $output;
+			// });
+		// }
+		// $data['api'] = $RestAPI;
 		$cond = [
 			'loc'	=> url('video/'.$urlTitle.'/'.$id.'/'.$urlDesc.'/'.$meta)
 		];
@@ -110,7 +111,27 @@ class HomeController extends Controller
 		];
 		dispatch((new AddSitemap($cond, $save))->onQueue('low'));
 		dispatch((new AddSitemap($cond2, $save))->onQueue('low'));
-		return view('eks.welcome', compact('data','q','id','title','desc', 'met'));
+		return view('eks.welcome', compact('q','id','title','desc', 'met'));
+	}
+	
+	public function suggest(Request $req)
+	{
+		$q = $req->input('q');
+		$Master = new Master;
+		if (Cache::has($q)){
+			$RestAPI = Cache::get($q);
+		} else {
+			$RestAPI = Cache::rememberForever($q, function () use($Master, $q) {
+				$output =  $Master->setEndpoint('youtube/search')
+						->setQuery([
+							'q'=>$q
+						])
+						->get();
+				return $output;
+			});
+		}
+		$data['api'] = $RestAPI;
+		return view('eks.list', compact('data'));
 	}
 	
 	public function sitemap()

@@ -211,8 +211,8 @@
 							@endif
 						</div>	
 					</div>
-                    <div class="row">
-                        
+                    <div class="row target-list">
+                     @if(isset($data['api']))   
 						@foreach($data['api'] as $dt)
 						<div class="col-lg-3 col-md-3">
                             <div class="single_place">
@@ -267,7 +267,8 @@
                             </div>
                         </div>
 						@endforeach
-                    </div>
+					@endif	
+					</div>
                     
 					<!--  
 					<div class="row">
@@ -285,6 +286,27 @@
 	
 	@include('eks.parts.foot')
     
+	<script>
+	@if(isset($title))
+	$(document).ready(()=>{
+		$.ajax({
+			type:'get',
+			url:"{{ route('suggest') }}",
+			data:"q={{ $title }}",
+			cache:false,
+			beforeSend:()=>{
+				$('.target-list').html('Load similar data...')
+			},
+			complete:()=>{
+				
+			},
+			success: (rsp)=>{
+				$('.target-list').html(rsp)
+			}
+		})
+	});
+	@endif
+	</script>
 </body>
 
 </html>
