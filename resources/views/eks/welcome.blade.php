@@ -232,12 +232,12 @@
                                 <div class="place_info">
 									@if(@$dt['vid'] != '')
 										@if(isset($dt['meta']) && $dt['meta'] != '')
-											<a href="{{ url('video/'.urlencode(str_replace('.','%2E',$dt['title'])).'/'.$dt['vid'].'/'.base64_encode(@$dt['oriDesc']).'/'.base64_encode($dt['meta']) ) }}"><h3>{{ @$dt['title'] }}</h3></a>
+											<a href="{{ url('video/'.urlencode(str_replace(['.','/'],['%2E','-'],$dt['title'])).'/'.$dt['vid'].'/'.base64_encode(@$dt['oriDesc']).'/'.base64_encode($dt['meta']) ) }}"><h3>{{ @$dt['title'] }}</h3></a>
 										@else
 											@php
 												$oD = @$dt['oriDesc'] ? base64_encode($dt['oriDesc']) : base64_encode('Watch now '.$dt['title']);
 											@endphp
-											<a href="{{ url('video/'.urlencode(str_replace('.','%2E',$dt['title'])).'/'.$dt['vid'].'/'.$oD.'/'.base64_encode('Watch now!') ) }}"><h3>{{ @$dt['title'] }}</h3></a>
+											<a href="{{ url('video/'.urlencode(str_replace(['.','/'],['%2E','-'],$dt['title'])).'/'.$dt['vid'].'/'.$oD.'/'.base64_encode('Watch now!') ) }}"><h3>{{ @$dt['title'] }}</h3></a>
 										@endif
 									@else
 									<h3>{{ @$dt['title'] }}</h3>
