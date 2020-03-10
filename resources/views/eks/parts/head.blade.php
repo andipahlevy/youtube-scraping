@@ -1,14 +1,15 @@
 <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>{{ @$q }}  {{ env('APP_NAME') }}</title>
+	<link rel="canonical" href="{{ url() }}">
+    <title>{{ @$q }}  {{ env('APP_NAME','John Deere Video') }}</title>
     
 	<?php 
-	$m_title 	= $q ?? env('APP_NAME');
-	$d_desc 	= $desc ?? 'Watch video in '.env('APP_NAME');
+	$m_title 	= isset($q) ? $q.' - '.env('APP_NAME','John Deere Video') : env('APP_NAME','John Deere Video');
+	$d_desc 	= isset($desc) ? $desc.' - '.env('KEYWORDS') : env('KEYWORDS');
 	$m_desc 	= strip_tags(str_replace('*dot*','.',urldecode($d_desc))) .' '. $m_title ?? $m_title ;
 	?>
 	
-	<meta name="description" content="Video {{ $m_desc }}">
+	<meta name="description" content="{{ $m_desc }}">
 	<meta name='keywords' content='{{ implode(',',explode(' ',$m_title)) }}'/>
 	
 	
@@ -17,7 +18,7 @@
 	<meta property='og:description' content='{{ $m_desc }}'/>
 	<meta property='og:image' content=''/>
 	<meta property='og:type' content='video'/>
-	<meta property='og:site_name' content="{{ env('APP_NAME') }}"/>
+	<meta property='og:site_name' content="{{ env('APP_NAME','John Deere Video') }}"/>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 

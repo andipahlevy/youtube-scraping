@@ -189,6 +189,10 @@
                      <p class="excert">
 					 {!! str_replace('*dot*','.',urldecode($desc)) !!}
                      </p>
+					 
+					 <p>
+						<a href="https://www.youtube.com/watch?v={{ $id }}" target="_blank" rel="nofollow">Source</a>
+					 </p>
                      
                   </div>
                </div>
