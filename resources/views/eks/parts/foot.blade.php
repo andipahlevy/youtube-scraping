@@ -33,6 +33,8 @@ Copyright &copy; {{ env('APP_NAME') }} 2020
     
 
     <!-- JS here -->
+	<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5e689ad5a6c3be00121b3c40&product=inline-share-buttons&cms=sop' async='async'></script>
+
     <script src="{{ url('theme/js/vendor/modernizr-3.5.0.min.js') }}"></script>
     <script src="{{ url('theme/js/vendor/jquery-1.12.4.min.js') }}"></script>
     <script src="{{ url('theme/js/popper.min.js') }}"></script>
