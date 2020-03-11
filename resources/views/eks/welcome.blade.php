@@ -196,7 +196,10 @@
 					 </p>
 					 
 					 <p>
+					 <div>
+						Share this video!
 						<div class="sharethis-inline-share-buttons"></div>
+					 </div>
 					 </p>
                      
                   </div>
