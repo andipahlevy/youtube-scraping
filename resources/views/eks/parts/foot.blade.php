@@ -98,3 +98,4 @@ Copyright &copy; {{ env('APP_NAME') }} 2020
 			return s.split(' ').join('-')
 		}
     </script>
+	<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5e689ad5a6c3be00121b3c40&product=inline-share-buttons&cms=sop' async='async'></script>
