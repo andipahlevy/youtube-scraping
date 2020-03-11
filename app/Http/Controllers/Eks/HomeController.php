@@ -161,11 +161,13 @@ class HomeController extends Controller
 		<url>
 		 <loc>".url()."</loc>
 		 <lastmod>2020-03-05T18:00:15+00:00</lastmod>
+		 <priority>1.00</priority>
 		 <changefreq>daily</changefreq>
 		</url>
 		<url>
 		 <loc>".url('sitemap/xml')."</loc>
 		 <lastmod>2020-03-05T18:00:15+00:00</lastmod>
+		 <priority>0.8</priority>
 		 <changefreq>daily</changefreq>
 		</url>";
 		
@@ -176,6 +178,7 @@ class HomeController extends Controller
 		 $content .= "<url>";
 		 $content .= "<loc>".str_replace(' ','+',$locc)."</loc>";
 		 $content .= "<lastmod>".gmdate('Y-m-d\TH:i:s+00:00', strtotime($row['lastmod']))."</lastmod>";
+		 $content .= "<priority>0.5</priority>";
 		 $content .= "<changefreq>monthly</changefreq>";
 		 $content .= "</url>";
 		 
