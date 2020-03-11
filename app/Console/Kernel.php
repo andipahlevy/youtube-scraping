@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \App\Console\Commands\FlushCache::class,
+        \App\Console\Commands\FlushSitemap::class,
     ];
 
     /**

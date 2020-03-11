@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Artisan;
 
 class HomeController extends Controller
 {
-	private $cmd = ['videv:FlushCache'];
+	private $cmd = ['videv:FlushCache','videv:FlushSitemap'];
 	
     /**
      * Create a new controller instance.
