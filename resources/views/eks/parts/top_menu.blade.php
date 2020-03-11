@@ -6,7 +6,7 @@
                         <div class="row align-items-center">
                             <div class="col-xl-1 col-lg-1">
                                 <div class="logo">
-                                    <a href="{{ route('home') }}">
+                                    <a href="{{ route('home') }}" title="{{ env('APP_NAME') }}">
 										{{ env('APP_LOGO') }}
                                     </a>
                                 </div>

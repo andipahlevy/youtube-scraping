@@ -8,7 +8,7 @@
 	$d_desc 	= isset($desc) ? $desc.' - '.env('KEYWORDS') : env('KEYWORDS');
 	$m_desc 	= strip_tags(str_replace('*dot*','.',urldecode($d_desc))) .' '. $m_title ?? $m_title ;
 	?>
-	
+	<meta name="google-site-verification" content="google-site-verification=Brecsmg94WrCFj1fc65cPQ3NcG0YkW-sR4RXgFJIw3g">
 	<meta name="description" content="{{ $m_desc }}">
 	<meta name='keywords' content='{{ implode(',',explode(' ',$m_title)) }}'/>
 	
