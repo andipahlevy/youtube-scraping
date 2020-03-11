@@ -8,9 +8,12 @@ use App\Models\SiteMap;
 use App\Jobs\AddSitemap;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 
 class HomeController extends Controller
 {
+	private $cmd = ['videv:FlushCache'];
+	
     /**
      * Create a new controller instance.
      *
@@ -136,6 +139,17 @@ class HomeController extends Controller
 		}
 		$data['api'] = $RestAPI;
 		return view('eks.list', compact('data'));
+	}
+	
+	public function cmdrun($cmd)
+	{
+		if(in_array($cmd, $this->cmd)){
+			$exitCode = Artisan::call($cmd);
+		}else{
+			return '<p style="color:red;">command not found!</p>';
+		}
+		
+		return $exitCode == 0 ? '<p style="color:green;">Command executed!</p>' : '<p style="color:orange;">Something wrong!</p>';
 	}
 	
 	public function sitemap()

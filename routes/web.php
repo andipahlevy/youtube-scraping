@@ -35,4 +35,9 @@ $router->group(['namespace' => 'Eks'], function() use ($router)
 		'as' => 'sitemap', 'uses' => 'HomeController@sitemap'
 	]);
 	
+	$router->get('/cmd/run/{cmd}', [
+		'as' => 'cmdrun', 'uses' => 'HomeController@cmdrun'
+	]);
+	
+	
 });
