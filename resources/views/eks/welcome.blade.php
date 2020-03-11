@@ -215,11 +215,14 @@
             <div class="row">
                 <div class="col-lg-12">
 					<div class="row mb-3">
-						<div class="section_title" style="text-align:center;">
+						<div class="section_title">
 							@if(isset($title))
 								<h2> Similar videos:</h2>
 							@else
 								<h1>{{ isset($q) ? urldecode(ucfirst($q)) : ucfirst(env('APP_NAME')) }}</h1>
+								<article>
+									You can find more videos like {{ isset($q) ? urldecode(ucfirst($q)) : ucfirst(env('APP_NAME')) }}. Don't forget to share this video :)
+								</article>
 							@endif
 						</div>	
 					</div>
@@ -247,7 +250,7 @@
 											<a href="{{ url('video/'.urlencode(str_replace(['.','/'],['%2E','-'],$dt['title'])).'/'.$dt['vid'].'/'.base64_encode(@$dt['oriDesc']).'/'.base64_encode($dt['meta']) ) }}"><h3>{{ @$dt['title'] }}</h3></a>
 										@else
 											@php
-												$oD = @$dt['oriDesc'] ? base64_encode($dt['oriDesc']) : base64_encode('Watch now '.$dt['title']);
+												$oD = isset($dt['oriDesc']) ? base64_encode($dt['oriDesc']) : base64_encode('Watch now '.$dt['title']);
 											@endphp
 											<a href="{{ url('video/'.urlencode(str_replace(['.','/'],['%2E','-'],$dt['title'])).'/'.$dt['vid'].'/'.$oD.'/'.base64_encode('Watch now!') ) }}"><h3>{{ @$dt['title'] }}</h3></a>
 										@endif
