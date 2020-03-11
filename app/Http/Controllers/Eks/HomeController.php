@@ -175,7 +175,7 @@ class HomeController extends Controller
 		 $locc = preg_replace('/&(?!#?[a-z0-9];)/', '&amp;', $row['loc']);
 		 $content .= "<url>";
 		 $content .= "<loc>".str_replace(' ','+',$locc)."</loc>";
-		 $content .= "<lastmod>".$row['lastmod']."</lastmod>";
+		 $content .= "<lastmod>".gmdate('Y-m-d\TH:i:s+00:00', strtotime($row['lastmod']))."</lastmod>";
 		 $content .= "<changefreq>monthly</changefreq>";
 		 $content .= "</url>";
 		 
