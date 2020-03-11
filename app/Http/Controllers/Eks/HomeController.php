@@ -52,7 +52,7 @@ class HomeController extends Controller
 		if (Cache::has($q)){
 			$RestAPI = Cache::get($q);
 		} else {
-			$RestAPI = Cache::rememberForever($q, function () use($Master, $q) {
+			$RestAPI = Cache::remember($q, 43200, function () use($Master, $q) {
 				$output =  $Master->setEndpoint('youtube/search')
 						->setQuery([
 							'q'=>$q
