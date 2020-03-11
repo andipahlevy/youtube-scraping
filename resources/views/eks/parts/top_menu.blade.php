@@ -7,7 +7,7 @@
                             <div class="col-xl-1 col-lg-1">
                                 <div class="logo">
                                     <a href="{{ route('home') }}">
-                                        <img width="70px" src="{{ url('theme/images/logo.png') }}" alt="">
+										{{ env('APP_LOGO') }}
                                     </a>
                                 </div>
                             </div>

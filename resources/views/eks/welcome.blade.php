@@ -3,6 +3,7 @@
 
 <head>
     @include('eks.parts.head')
+    @include('eks.parts.style')
 </head>
 
 <body>
@@ -207,11 +208,11 @@
             <div class="row">
                 <div class="col-lg-12">
 					<div class="row mb-3">
-						<div class="section_title text-center">
+						<div class="section_title" style="text-align:center;">
 							@if(isset($title))
 								<h2> Similar videos:</h2>
 							@else
-								<h1>{{ urldecode(ucfirst(@$q)) ?? ucfirst(env('APP_NAME')) }}</h1>
+								<h1>{{ isset($q) ? urldecode(ucfirst($q)) : ucfirst(env('APP_NAME')) }}</h1>
 							@endif
 						</div>	
 					</div>

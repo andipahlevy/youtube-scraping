@@ -29,7 +29,11 @@ class HomeController extends Controller
 			$RestAPI = Cache::get('ytrend');
 		} else {
 			$RestAPI = Cache::rememberForever('ytrend', function () use($Master) {
-				return  $Master->setEndpoint('youtube/trends')->get();
+				return  $Master->setEndpoint('youtube/search')
+						->setQuery([
+							'q'=>env('APP_NAME')
+						])
+						->get();
 			});
 		}
 		// dd($RestAPI);
