@@ -194,6 +194,10 @@
 					 <p>
 						<a href="https://www.youtube.com/watch?v={{ $id }}" target="_blank" rel="nofollow">Source</a>
 					 </p>
+					 
+					 <p>
+						<div class="sharethis-inline-share-buttons"></div>
+					 </p>
                      
                   </div>
                </div>
