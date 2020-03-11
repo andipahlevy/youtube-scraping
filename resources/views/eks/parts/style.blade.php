@@ -17,7 +17,7 @@
 .header-area .main-header-area .main-menu ul li a:hover {
     color: {{ env('APP_SECONDARY_COLOR') }};
 }
-.popular_places_area .single_place .thumb .prise{
+.popular_places_area .single_place .thumb .prise, .custom_search_pop .modal-content .serch_form button{
 	background: {{ env('APP_PRIMARY_COLOR') }};
 }
 .popular_places_area .single_place:hover .place_info h3 {
