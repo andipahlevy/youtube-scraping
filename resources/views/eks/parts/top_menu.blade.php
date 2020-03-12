@@ -15,9 +15,10 @@
                                 <div class="main-menu  d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a class="active" href="{{ route('home') }}">home</a></li>
-                                            <li><a href="#">Trending</a></li>
-                                            <li><a href="#">Contact</a></li>
+                                            <li><a class="active" href="{{ route('home') }}">Home</a></li>
+                                            <li><a href="{{ route('home') }}">Popular Videos</a></li>
+                                            <li><a href="{{ route('page.about') }}">About</a></li>
+                                            <li><a href="{{ route('page.contact') }}">Contact</a></li>
                                             
                                         </ul>
                                     </nav>

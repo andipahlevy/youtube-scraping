@@ -23,4 +23,7 @@
 .popular_places_area .single_place:hover .place_info h3 {
     color: {{ env('APP_SECONDARY_COLOR') }};
 }
+a.slicknav_btn.slicknav_collapsed{
+	margin: 0px !important;
+}
 </style>

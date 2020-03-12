@@ -39,5 +39,13 @@ $router->group(['namespace' => 'Eks'], function() use ($router)
 		'as' => 'cmdrun', 'uses' => 'HomeController@cmdrun'
 	]);
 	
+	$router->get('/page/about', [
+		'as' => 'page.about', 'uses' => 'HomeController@about'
+	]);
+	
+	$router->get('/page/contact', [
+		'as' => 'page.contact', 'uses' => 'HomeController@contact'
+	]);
+	
 	
 });

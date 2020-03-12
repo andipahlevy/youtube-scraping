@@ -31,7 +31,7 @@ class HomeController extends Controller
 		if (Cache::has('ytrend')){
 			$RestAPI = Cache::get('ytrend');
 		} else {
-			$RestAPI = Cache::remember('ytrend', 43200, function () use($Master) {
+			$RestAPI = Cache::remember('ytrend', (60*24), function () use($Master) {
 				return  $Master->setEndpoint('youtube/search')
 						->setQuery([
 							'q'=>env('APP_NAME')
@@ -39,9 +39,10 @@ class HomeController extends Controller
 						->get();
 			});
 		}
-		// dd($RestAPI);
+		
 		$data['api'] = $RestAPI;
-		return view('eks.welcome', compact('data'));
+		$mainPage = 'mainContent';
+		return view('eks.welcome', compact('data','mainPage'));
 	}
 
     public function find($q)
@@ -52,7 +53,7 @@ class HomeController extends Controller
 		if (Cache::has($q)){
 			$RestAPI = Cache::get($q);
 		} else {
-			$RestAPI = Cache::remember($q, 43200, function () use($Master, $q) {
+			$RestAPI = Cache::remember($q, (60*24*15), function () use($Master, $q) {
 				$output =  $Master->setEndpoint('youtube/search')
 						->setQuery([
 							'q'=>$q
@@ -71,7 +72,8 @@ class HomeController extends Controller
 			'priority'	=> '0.5',
 		];
 		dispatch((new AddSitemap($cond, $save))->onQueue('low'));
-		return view('eks.welcome', compact('data','q'));
+		$mainPage = 'mainContent';
+		return view('eks.welcome', compact('data','q','mainPage'));
 	}
 	
 	public function detail($title, $id,$desc, $meta)
@@ -118,7 +120,8 @@ class HomeController extends Controller
 		];
 		dispatch((new AddSitemap($cond, $save))->onQueue('low'));
 		dispatch((new AddSitemap($cond2, $save))->onQueue('low'));
-		return view('eks.welcome', compact('q','id','title','desc', 'met'));
+		$mainPage = 'mainContent';
+		return view('eks.welcome', compact('q','id','title','desc', 'met','mainPage'));
 	}
 	
 	public function suggest(Request $req)
@@ -139,6 +142,22 @@ class HomeController extends Controller
 		}
 		$data['api'] = $RestAPI;
 		return view('eks.list', compact('data'));
+	}
+	
+	public function about()
+	{
+		$title = env('APP_NAME');
+		$desc = env('APP_ABOUT',env('APP_NAME').' collections');
+		$mainPage = 'aboutPage';
+		return view('eks.welcome', compact('title','desc','mainPage'));
+	}
+	
+	public function contact()
+	{
+		$title = 'Contact Us';
+		$desc = env('APP_ABOUT','For informations you can email us at <a href="mailto:cascadejeans@gmail.com">cascadejeans@gmail.com</a>');
+		$mainPage = 'aboutPage';
+		return view('eks.welcome', compact('title','desc','mainPage'));
 	}
 	
 	public function cmdrun($cmd)
