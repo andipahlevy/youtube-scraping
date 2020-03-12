@@ -208,13 +208,21 @@
 						<div class="col-lg-3 col-md-3">
                             <div class="single_place">
                                 <div class="thumb">
+								<?php 
+								$oD = isset($dt['oriDesc']) ? base64_encode($dt['oriDesc']) : base64_encode('Watch now '.$dt['title']);
+								if(isset($dt['meta']) && $dt['meta'] != ''){
+									$iniURL = url('video/'.urlencode(str_replace(['.','/'],['%2E','-'],$dt['title'])).'/'.$dt['vid'].'/'.$oD.'/'.base64_encode($dt['meta']) );
+								}else{
+									$iniURL = url('video/'.urlencode(str_replace(['.','/'],['%2E','-'],$dt['title'])).'/'.$dt['vid'].'/'.$oD.'/'.base64_encode('Watch now!') );
+								}
+								?>
 								@if(isset($dt['img']))
 									<?php 
 										if(substr($dt['img'],0,4) != 'http'){
 											$dt['img'] = 'https:'.$dt['img'];
 										}
 									?>
-                                    <a href="">
+                                    <a href="{{ $iniURL }}">
 									<img src="{{ @$dt['img'] }}" alt="{{ @$dt['title'] }} - {{ env('APP_NAME') }}" title="{{ @$dt['title'] }}">
 									</a>
 								@endif	
@@ -224,14 +232,7 @@
 								</div>
                                 <div class="place_info">
 									@if(@$dt['vid'] != '')
-										@if(isset($dt['meta']) && $dt['meta'] != '')
-											<a href="{{ url('video/'.urlencode(str_replace(['.','/'],['%2E','-'],$dt['title'])).'/'.$dt['vid'].'/'.base64_encode(@$dt['oriDesc']).'/'.base64_encode($dt['meta']) ) }}"><h3>{{ @$dt['title'] }}</h3></a>
-										@else
-											@php
-												$oD = isset($dt['oriDesc']) ? base64_encode($dt['oriDesc']) : base64_encode('Watch now '.$dt['title']);
-											@endphp
-											<a href="{{ url('video/'.urlencode(str_replace(['.','/'],['%2E','-'],$dt['title'])).'/'.$dt['vid'].'/'.$oD.'/'.base64_encode('Watch now!') ) }}"><h3>{{ @$dt['title'] }}</h3></a>
-										@endif
+										<a href="{{ $iniURL }}"><h3>{{ @$dt['title'] }}</h3></a>
 									@else
 									<h3>{{ @$dt['title'] }}</h3>
 									@endif
