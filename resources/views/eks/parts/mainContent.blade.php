@@ -165,8 +165,16 @@
 					 
 					 <p>
 					 <div>
-						Share this video!
-						<div class="sharethis-inline-share-buttons"></div>
+						
+						<div class="bagikan">
+							<div class="col-md-12">
+								Share this video!
+							</div>
+							<a target="_blank" href="{{ "http://www.facebook.com/share.php?u=http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]&title=$q" }}" class="fa fa-facebook"></a>
+							<a target="_blank" href="{{ "http://twitter.com/home?status=$q+http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" }}" class="fa fa-twitter"></a>
+							<a target="_blank" href="{{ "https://plus.google.com/share?url=http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" }}" class="fa fa-google"></a>
+							<a target="_blank" href="{{ "http://www.linkedin.com/shareArticle?mini=true&url=http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]&title=$q&source=$_SERVER[HTTP_HOST]" }}" class="fa fa-linkedin"></a>
+						</div>
 					 </div>
 					 </p>
                      

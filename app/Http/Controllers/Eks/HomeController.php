@@ -155,7 +155,7 @@ class HomeController extends Controller
 	public function contact()
 	{
 		$title = 'Contact Us';
-		$desc = env('APP_ABOUT','For informations you can email us at <a href="mailto:cascadejeans@gmail.com">cascadejeans@gmail.com</a>');
+		$desc = 'For informations you can email us at <a href="mailto:'.env('APP_CONTACT','cascadejeans@gmail.com').'">'.env('APP_CONTACT','cascadejeans@gmail.com').'</a>';
 		$mainPage = 'aboutPage';
 		return view('eks.welcome', compact('title','desc','mainPage'));
 	}
