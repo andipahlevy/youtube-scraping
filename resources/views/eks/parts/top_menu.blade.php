@@ -8,16 +8,21 @@
                                 <div class="logo">
                                     <a href="{{ route('home') }}" title="{{ env('APP_NAME') }}">
 										{{ env('APP_LOGO') }}
+										@php
+											$appMenu = explode(',',env('APP_MENU'));
+										@endphp
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-xl-6 col-lg-6">
+                            <div class="col-xl-9 col-lg-9">
                                 <div class="main-menu  d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
                                             <li><a class="active" href="{{ route('home') }}">Home</a></li>
-                                            <li><a href="{{ route('home') }}">Popular Videos</a></li>
-                                            <li><a href="{{ route('page.about') }}">About</a></li>
+											@foreach($appMenu as $apm)
+											<li><a href="{{ route('home') }}/{{ str_replace(' ','+',$apm) }}">{{ $apm }}</a></li>
+											@endforeach
+											<li><a href="{{ route('page.about') }}">About</a></li>
                                             <li><a href="{{ route('page.contact') }}">Contact</a></li>
                                             
                                         </ul>
