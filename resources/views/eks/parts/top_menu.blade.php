@@ -21,9 +21,9 @@
                                             <li><a class="active" href="{{ route('home') }}">Home</a></li>
 											@foreach($appMenu as $apm)
 												@php
-												$auMn = explode(':',$apm)
+												$auMn = explode(':',$apm);
 												@endphp
-											<li><a href="{{ route('home') }}/{{ str_replace(' ','+',$auMn[0]) }}">{{ $apm[1] }}</a></li>
+											<li><a href="{{ route('home') }}/{{ str_replace(' ','+',$auMn[0]) }}">{{ $auMn[1] }}</a></li>
 											@endforeach
 											<li><a href="{{ route('page.about') }}">About</a></li>
                                             <li><a href="{{ route('page.contact') }}">Contact</a></li>
