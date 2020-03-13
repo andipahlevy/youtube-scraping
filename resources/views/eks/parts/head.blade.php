@@ -77,11 +77,11 @@
 	</style>
 	
 	<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-160267768-1"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ env('APP_GAID') }}"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-160267768-1');
+  gtag('config', '{{ env('APP_GAID') }}');
 </script>
