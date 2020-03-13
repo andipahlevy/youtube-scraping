@@ -4,7 +4,18 @@
     <title>{{ @$q }}  {{ env('APP_NAME','John Deere Video') }}</title>
     
 	<?php 
+	$img = imagecreate(400, 200);
+    
+	$textbgcolor = imagecolorallocate($img, 255,255,255);
+	$textcolor = imagecolorallocate($img, 0, 0, 0);
 	$m_title 	= isset($q) ? $q.' - '.env('APP_NAME','John Deere Video') : env('APP_NAME','John Deere Video');
+	
+	$txt = isset($q) ? $q : env('APP_NAME','John Deere Video');
+	imagestring($img, 30, 35, 70, $txt, $textcolor);
+	ob_start();
+	imagepng($img);
+	$IMAGE = "data:image/png;base64,".base64_encode(ob_get_clean());
+	
 	$d_desc 	= isset($desc) ? $desc.' - '.env('KEYWORDS') : env('KEYWORDS');
 	$m_desc 	= strip_tags(str_replace('*dot*','.',urldecode($d_desc))) .' '. $m_title ?? $m_title ;
 	?>
@@ -16,7 +27,10 @@
 	<meta property='og:url' content="<?php echo "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" ?>"/>
 	<meta property='og:title' content="{{ $m_title }}"/>
 	<meta property='og:description' content='{{ $m_desc }}'/>
-	<meta property='og:image' content=''/>
+	<meta property="og:image" content="{{ $IMAGE }}" id="ogImage">
+	<meta property="og:image:type" content="image/png">
+	<meta property="og:image:width" content="1024">
+	<meta property="og:image:height" content="1024">
 	<meta property='og:type' content='video'/>
 	<meta property='og:site_name' content="{{ env('APP_NAME','John Deere Video') }}"/>
 
