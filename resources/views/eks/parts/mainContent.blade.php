@@ -202,6 +202,9 @@
 							@endif
 						</div>	
 					</div>
+					
+					
+					
                     <div class="row target-list">
                      @if(isset($data['api']))   
 						@foreach($data['api'] as $dt)
@@ -263,16 +266,12 @@
 						@endforeach
 					@endif	
 					</div>
-                    
-					<!--  
+					
 					<div class="row">
                         <div class="col-lg-12">
-                            <div class="more_place_btn text-center">
-                                <a class="boxed-btn4" href="#">More Videos</a>
-                            </div>
+						{!! env('APP_AMAZON_ADS') !!}
                         </div>
                     </div>
-					-->
                 </div>
             </div>
         </div>

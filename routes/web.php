@@ -47,5 +47,9 @@ $router->group(['namespace' => 'Eks'], function() use ($router)
 		'as' => 'page.contact', 'uses' => 'HomeController@contact'
 	]);
 	
+	$router->get('/page/shop', [
+		'as' => 'page.shop', 'uses' => 'HomeController@shop'
+	]);
+	
 	
 });

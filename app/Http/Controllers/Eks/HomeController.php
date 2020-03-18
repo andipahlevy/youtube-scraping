@@ -160,6 +160,14 @@ class HomeController extends Controller
 		return view('eks.welcome', compact('title','desc','mainPage'));
 	}
 	
+	public function shop()
+	{
+		$title = env('APP_NICK').' Products';
+		$desc = env('APP_AMAZON_ADS2');
+		$mainPage = 'aboutPage';
+		return view('eks.welcome', compact('title','desc','mainPage'));
+	}
+	
 	public function cmdrun($cmd)
 	{
 		if(in_array($cmd, $this->cmd)){

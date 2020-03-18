@@ -25,6 +25,7 @@
 												@endphp
 											<li><a href="{{ route('home') }}/{{ str_replace(' ','+',$auMn[0]) }}">{{ $auMn[1] }}</a></li>
 											@endforeach
+											<li><a href="{{ route('page.shop') }}">Shop</a></li>
 											<li><a href="{{ route('page.about') }}">About</a></li>
                                             <li><a href="{{ route('page.contact') }}">Contact</a></li>
                                             
