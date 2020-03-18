@@ -269,7 +269,7 @@
 					
 					<div class="row">
                         <div class="col-lg-12">
-						{!! env('APP_AMAZON_ADS') !!}
+						{!! env('APP_AMAZON_ADS',null) !!}
                         </div>
                     </div>
                 </div>
