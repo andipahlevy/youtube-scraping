@@ -206,11 +206,7 @@
 					<div class="row">
 						<div class="col-md-12">
 						<!-- /14116792/japaninbottom -->
-						<div id='div-gpt-ad-1584601354468-0' style='width: 728px; height: 90px;'>
-						  <script>
-							googletag.cmd.push(function() { googletag.display('div-gpt-ad-1584601354468-0'); });
-						  </script>
-						</div>
+						<script data-ad-client="ca-pub-1403803904845642" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 						</div>
 					</div>
 					
