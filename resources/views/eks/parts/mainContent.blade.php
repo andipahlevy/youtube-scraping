@@ -203,7 +203,16 @@
 						</div>	
 					</div>
 					
-					
+					<div class="row">
+						<div class="col-md-12">
+						<!-- /14116792/japaninbottom -->
+						<div id='div-gpt-ad-1584601354468-0' style='width: 728px; height: 90px;'>
+						  <script>
+							googletag.cmd.push(function() { googletag.display('div-gpt-ad-1584601354468-0'); });
+						  </script>
+						</div>
+						</div>
+					</div>
 					
                     <div class="row target-list">
                      @if(isset($data['api']))   
